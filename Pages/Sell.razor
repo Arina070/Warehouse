@@ -1,0 +1,35 @@
+﻿@page "/sell/{Id?}"
+
+@using Warehouse.Data;
+@inject StockRepository stockRepository;
+@inject SaleRepository saleRepository;
+
+
+<h3>Sell @Id</h3>
+
+
+@if (saleData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <label>Name:</label>
+    <input disabled="disabled" value="@saleData.Name" />
+    
+    <label>Price:</label>
+    <input disabled="disabled" value="@stockItem.SellPrice" />
+    
+    <label>Minimal price:</label>
+    <input disabled="disabled" value="@saleData.Price" />
+    
+    <label>Price with discount:</label>
+    <input @bind="saleData.ChequePrice" />
+    
+    <label>Amoung:</label>
+    <input @bind="saleData.Count" />
+    
+    <button @onclick="OnSave">Save</button>
+}
+
+<a href="stock">Back</a>

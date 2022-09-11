@@ -1,0 +1,42 @@
+﻿@page "/stock"
+
+@using Warehouse.Data;
+@inject StockRepository repository;
+
+<h3>Stock</h3>
+
+@if (data == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<ul class="list-unstyled">
+		@foreach (var item in data)
+		{
+			<li>
+				<label>@item.Name</label>
+				<label>@item.Price</label>
+				<label>@item.SellPrice</label>
+				<label>@item.Count</label>
+				<a href="buy/@item.Id">Buy</a>
+				<a href="sell/@item.Id">Sell</a>
+			</li>
+		}
+	</ul>
+	<button @onclick="OnNewItem">New Item</button>
+}
+
+@code {
+    private List<Warehouse.Data.Models.Stock> data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await repository.GetAll();
+    }
+
+	private void OnNewItem()
+	{
+
+	}
+}
