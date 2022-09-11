@@ -46,6 +46,22 @@ namespace Warehouse.Data
             await connection.UpdateAsync(data);
         }
 
+        public async Task Add(Stock data)
+        {
+            var connection = await GetConnection();
+            await connection.InsertAsync(data);
+        }
+
+        public async Task Delete(int dataId)
+        {
+            var connection = await GetConnection();
+            var data = await connection.Table<Stock>().FirstOrDefaultAsync(x => x.Id == dataId);
+            if (data != null)
+            {
+                await connection.DeleteAsync(data);
+            }
+        }
+
         private readonly List<Stock> fakeData = new()
         {
             new Stock()
@@ -54,7 +70,7 @@ namespace Warehouse.Data
                 Count = 2,
                 Price = 100,
                 SellPrice = 115,
-                Type = "XXL"
+                Size = "XXL"
             },
             new Stock()
             {
@@ -62,7 +78,7 @@ namespace Warehouse.Data
                 Count = 1,
                 Price = 50,
                 SellPrice = 53,
-                Type = "M"
+                Size = "M"
             }
         };
     }

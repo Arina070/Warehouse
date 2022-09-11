@@ -1,7 +1,7 @@
 ﻿@page "/stock"
 
 @using Warehouse.Data;
-@inject StockRepository repository;
+@inject StockRepository stockRepository;
 
 <h3>Stock</h3>
 
@@ -15,28 +15,16 @@ else
 		@foreach (var item in data)
 		{
 			<li>
-				<label>@item.Name</label>
-				<label>@item.Price</label>
-				<label>@item.SellPrice</label>
-				<label>@item.Count</label>
+				<label><b>@item.Name</b></label><br />
+				<label>@item.Price</label><br/>
+				<label>@item.SellPrice</label><br/>
+				<label>@item.Count</label><br />
 				<a href="buy/@item.Id">Buy</a>
 				<a href="sell/@item.Id">Sell</a>
+				<button @onclick="@(()=> Delete(@item.Id))">Delete</button>
 			</li>
 		}
 	</ul>
-	<button @onclick="OnNewItem">New Item</button>
-}
 
-@code {
-    private List<Warehouse.Data.Models.Stock> data;
-
-    protected override async Task OnInitializedAsync()
-    {
-        data = await repository.GetAll();
-    }
-
-	private void OnNewItem()
-	{
-
-	}
+	<a href="buy">New Item</a>
 }
