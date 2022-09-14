@@ -19,12 +19,13 @@ namespace Warehouse.Pages
                 Price = stockItem.Price,
                 ChequePrice = stockItem.SellPrice,
                 Count = stockItem.Count,
+                Type = stockItem.Type
             };
         }
 
         private async Task Save()
         {
-            await saleRepository.Insert(saleData);
+            await saleRepository.Add(saleData);
 
             stockItem.Count -= saleData.Count;
             await stockRepository.Update(stockItem);

@@ -29,7 +29,7 @@ namespace Warehouse.Data
             return connection;
         }
 
-        public async Task Insert(Sale data)
+        public async Task Add(Sale data)
         {
             var connection = await GetConnection();
             await connection.InsertAsync(data);
