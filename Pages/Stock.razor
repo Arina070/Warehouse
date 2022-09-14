@@ -3,7 +3,10 @@
 @using Warehouse.Data;
 @inject StockRepository stockRepository;
 
+<div class="d-flex flex-column align-items-stretch" style="height: calc(100vh - 6rem);">
 <h3>Stock</h3>
+
+	<div class="flex-fill overflow-auto">
 
 @if (data == null)
 {
@@ -15,16 +18,13 @@ else
 		@foreach (var item in data)
 		{
 			<li>
-				<label><b>@item.Name</b></label><br />
-				<label>@item.Price</label><br/>
-				<label>@item.SellPrice</label><br/>
-				<label>@item.Count</label><br />
-				<a href="buy/@item.Id">Buy</a>
-				<a href="sell/@item.Id">Sell</a>
-				<button @onclick="@(()=> Delete(@item.Id))">Delete</button>
+				<StockCard Item="@item"/>
 			</li>
 		}
 	</ul>
-
-	<a href="buy">New Item</a>
 }
+	</div>
+</div>
+
+
+

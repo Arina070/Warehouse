@@ -1,5 +1,11 @@
 ﻿@page "/"
+@inject NavigationManager navigationManager
 
-<h1>Zubaryeva FIT 3-1</h1>
+<p><em>Loading...</em></p>
 
-Warehouse management project
+@code {
+	protected override async Task OnInitializedAsync()
+    {
+        navigationManager.NavigateTo("stock", true);
+    }
+}

@@ -22,8 +22,6 @@ public static class MauiProgram
 
 		string dbPath = Path.Combine(FileSystem.AppDataDirectory, "warehouse.db3");
 
-
-		builder.Services.AddSingleton<WeatherForecastService>();
 		builder.Services.AddSingleton(x => ActivatorUtilities.CreateInstance<StockRepository>(x, dbPath));
         builder.Services.AddSingleton(x => ActivatorUtilities.CreateInstance<SaleRepository>(x, dbPath));
 

@@ -18,9 +18,7 @@ namespace Warehouse.Data.Models
 
         public DateTime BoughtDate { get; set; } = DateTime.Now;
 
-        public string Size { get; set; }
-
-        public string Color { get; set; }
+        public string Type { get; set; }
 
     }
 }

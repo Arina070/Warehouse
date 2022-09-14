@@ -21,10 +21,6 @@ namespace Warehouse.Data
             connection = new SQLiteAsyncConnection(_dbPath);
             await connection.CreateTableAsync<Stock>();
 
-            if(await connection.Table<Stock>().CountAsync() == 0)
-            {
-                await connection.InsertAllAsync(fakeData);
-            };
             return connection;
         }
 
@@ -61,25 +57,5 @@ namespace Warehouse.Data
                 await connection.DeleteAsync(data);
             }
         }
-
-        private readonly List<Stock> fakeData = new()
-        {
-            new Stock()
-            {
-                Name ="T-Shirt",
-                Count = 2,
-                Price = 100,
-                SellPrice = 115,
-                Size = "XXL"
-            },
-            new Stock()
-            {
-                Name ="Pants",
-                Count = 1,
-                Price = 50,
-                SellPrice = 53,
-                Size = "M"
-            }
-        };
     }
 }

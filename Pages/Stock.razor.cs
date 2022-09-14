@@ -16,10 +16,5 @@ namespace Warehouse.Pages
             data = await stockRepository.GetAll();
         }
 
-        private async Task Delete(int id)
-        {
-            await stockRepository.Delete(id);
-            data = await stockRepository.GetAll();
-        }
     }
 }

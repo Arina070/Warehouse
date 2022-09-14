@@ -3,33 +3,33 @@
 @using Warehouse.Data;
 @inject StockRepository stockRepository;
 @inject SaleRepository saleRepository;
+@inject NavigationManager navigationManager;
 
 
-<h3>Sell @Id</h3>
+<h3>Sell an item</h3>
 
+<div class="form-floating mb-2">
+    <input id="name" class="form-control" @bind="@saleData.Name" disabled />
+    <label for="name">Title:</label>
+</div>
+<div class="form-floating mb-2">
+    <input id="type" class="form-control" @bind="@saleData.Type" disabled="true" />
+    <label for="name">Type (color, size etc):</label>
+</div>
+<div class="form-floating mb-2">
+    <input id="price" class="form-control" type="number" @bind="@saleData.Price" disabled="true"/>
+    <label for="name">Price:</label>
+</div>
+<div class="form-floating mb-2">
+    <input id="count" class="form-control" type="number" @bind="@stockItem.Count" />
+    <label for="name">Count:</label>
+</div>
+<div class="form-floating mb-2">
+    <input id="sell-price" class="form-control" type="number" @bind="@stockItem.SellPrice" />
+    <label for="name">Sell price:</label>
+</div>
 
-@if (saleData == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <label>Name:</label>
-    <input disabled="disabled" value="@saleData.Name" />
-    
-    <label>Price:</label>
-    <input disabled="disabled" value="@stockItem.SellPrice" />
-    
-    <label>Minimal price:</label>
-    <input disabled="disabled" value="@saleData.Price" />
-    
-    <label>Price with discount:</label>
-    <input @bind="saleData.ChequePrice" />
-    
-    <label>Amoung:</label>
-    <input @bind="saleData.Count" />
-    
-    <button @onclick="OnSave">Save</button>
-}
-
-<a href="stock">Back</a>
+<div class="d-flex justify-content-between gap-2">
+    <button class="btn btn-primary w-50 p-3" @onclick="Save">Save</button>
+    <a class="btn btn-outline-secondary w-50 p-3" href="stock">Cancel</a>
+</div>

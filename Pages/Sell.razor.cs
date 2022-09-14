@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Warehouse.Data;
 
 namespace Warehouse.Pages
 {
     public partial class Sell
     {
-        private Data.Models.Stock stockItem;
-        private Data.Models.Sale saleData;
+        private Data.Models.Stock stockItem = new();
+        private Data.Models.Sale saleData = new();
 
         [Parameter]
         public string Id { get; set; }
@@ -23,14 +22,14 @@ namespace Warehouse.Pages
             };
         }
 
-        private async Task OnSave()
+        private async Task Save()
         {
             await saleRepository.Insert(saleData);
 
             stockItem.Count -= saleData.Count;
             await stockRepository.Update(stockItem);
 
-            //TODO: Navigate back
+            navigationManager.NavigateTo("stock", true);
         }
     }     
 }
