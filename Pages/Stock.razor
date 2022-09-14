@@ -1,7 +1,10 @@
 ﻿@page "/stock"
 
 @using Warehouse.Data;
+@using Warehouse.Services;
+
 @inject StockRepository stockRepository;
+@inject RefreshService refreshService;
 
 <div class="d-flex flex-column align-items-stretch" style="height: calc(100vh - 6rem);">
 <h3>Stock</h3>

@@ -1,20 +1,28 @@
-﻿using Microsoft.Maui.Controls.Handlers.Items;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Warehouse.Pages
+﻿namespace Warehouse.Pages
 {
     public partial class Stock
     {
-        private List<Warehouse.Data.Models.Stock> data;
+        private List<Data.Models.Stock> data;
 
         protected override async Task OnInitializedAsync()
         {
-            data = await stockRepository.GetAll();
+            refreshService.RefreshRequested += async () =>
+            {
+                await RefreshMe();
+            };
+
+            await GetData();
         }
 
+        private async Task RefreshMe()
+        {
+            await GetData();
+            StateHasChanged();
+        }
+
+        private async Task GetData()
+        {
+            data = await stockRepository.GetAll();
+        }
     }
 }

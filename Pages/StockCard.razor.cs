@@ -11,6 +11,7 @@ namespace Warehouse.Pages
         private async Task Delete(int id)
         {
             await stockRepository.Delete(id);
+            refreshService.CallRequestRefresh();
         }
     }
 }

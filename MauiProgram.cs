@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using Warehouse.Data;
+using Warehouse.Services;
 
 namespace Warehouse;
 
@@ -24,6 +25,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton(x => ActivatorUtilities.CreateInstance<StockRepository>(x, dbPath));
         builder.Services.AddSingleton(x => ActivatorUtilities.CreateInstance<SaleRepository>(x, dbPath));
+        builder.Services.AddSingleton(x => ActivatorUtilities.CreateInstance<RefreshService>(x));
 
         return builder.Build();
 	}
